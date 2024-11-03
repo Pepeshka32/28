@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zaza</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #fullscreen-div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(240, 240, 240, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        #random-number, #mouse-coordinates, #mouse-click {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="fullscreen-div" onmousemove="showMouseCoordinates(event)" onmousedown="showMouseClick(event)">
+        <h1>random number & zaza</h1>
+        <button onclick="generateRandomNumber()">random</button>
+        <div id="random-number"></div>
+        <div id="mouse-coordinates">X: -, Y: -</div>
+        <div id="mouse-click">click: -</div>
+    </div>
+
+    <script>
+        function generateRandomNumber() {
+            const randomNumber = Math.floor(Math.random() * 101);
+            document.getElementById('random-number').innerText = randomNumber;
+        }
+
+        function showMouseCoordinates(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            document.getElementById('mouse-coordinates').innerText = `X: ${x}, Y: ${y}`;
+        }
+
+        function showMouseClick(event) {
+            let clickType;
+            if (event.button === 0) clickType = 'left';
+            else if (event.button === 2) clickType = 'right';
+            else clickType = 'another';
+
+            document.getElementById('mouse-click').innerText = `click: ${clickType}`;
+        }
+    </script>
+
+</body>
+</html>
